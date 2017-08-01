@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-/* Tic Tac Toe v1.0
+/* Tic Tac Toe v1.0.2
  * Thomas Knudson - 01 Aug 2017
  * 
  * This is a simple example of re-creating Tic Tac Toe using C# and WinForms.
@@ -44,12 +44,58 @@ namespace TicTacToe
         //Class variable that holds the mark for Player 1 (X) or Player 2 (O)
         private string currentPlayerMark = "";
 
+        //2-Dimensional array that holds all 9 gameTiles
+        private Button[,] gameBoard;
+
         public TicTacToeForm()
         {
             InitializeComponent();
 
+            //Populate the two dimensional array of buttons
+            InitializeGameBoard();
+
             //Disable the game board until the New Game button has been clicked
             ToggleGameBoard(false);
+        }
+        #region Form Logic
+        private void InitializeGameBoard()
+        {
+            //Initialize the array, 2-Dimensions, 3 rows and 3 columns
+            gameBoard = new Button[3, 3];
+
+            //Save the first row of tiles to the array
+            gameBoard[0, 0] = gameTile1;
+            gameBoard[0, 1] = gameTile2;
+            gameBoard[0, 2] = gameTile3;
+
+            //Save the second row of tiles
+            gameBoard[1, 0] = gameTile4;
+            gameBoard[1, 1] = gameTile5;
+            gameBoard[1, 2] = gameTile6;
+
+            //Save the third row of tiles
+            gameBoard[2, 0] = gameTile7;
+            gameBoard[2, 1] = gameTile8;
+            gameBoard[2, 2] = gameTile9;
+        }
+
+        private void gameTile_Click(object sender, EventArgs e)
+        {
+            //Save a copy of the button that was clicked
+            Button gameTile = (Button)sender;
+
+            //Make sure the tile is empty
+            if (gameTile.Text.Equals(" "))
+            {
+                //If it is, award the tile to the current player
+                gameTile.Text = currentPlayerMark;
+
+                //disable the button, to prevent it from being clicked again
+                gameTile.Enabled = false;
+
+                //End the Current Player's turn
+                NextTurn();
+            }
         }
 
         private void newGameButton_Click(object sender, EventArgs e)
@@ -63,6 +109,48 @@ namespace TicTacToe
             //Allow the game tiles on the board to be clicked
             ToggleGameBoard(true);
         }
+
+        /// <summary>
+        /// Sets the "Enabled" property on each gameTile to the value of "newState".
+        /// if the value of "newState" is set to true,
+        /// Players will be able to click on the board.
+        /// Otherwise, the players will be unable to interact with any of the tiles.
+        /// </summary>
+        /// <param name="newState"></param>
+        private void ToggleGameBoard(bool newState)
+        {
+            //Loop over each gameTile in the gameBoard, and set the Enabled property to the value of "newState"
+            for (int row = gameBoard.GetLowerBound(0); row <= gameBoard.GetUpperBound(0); row++)
+            {
+                /* The functions "GetLowerBound(int dimension)" and "GetUpperBound(int dimension)",
+                     * return the respective indexes for the first and last elements in the specified array.
+                     * While this is not critical, it allows future changes to the size of the gameBoard without
+                     * having to change every hardcoded upper limit on each set of nested for loops.
+                     */
+                for (int column = gameBoard.GetLowerBound(1); column <= gameBoard.GetUpperBound(1); column++)
+                {
+                    gameBoard[row, column].Enabled = newState;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Reset each gameTile to an empty state.
+        /// </summary>
+        private void ResetGameBoard()
+        {
+            //Loop over each gameTile in the gameBoard, erases any player moves
+            for (int row = gameBoard.GetLowerBound(0); row <= gameBoard.GetUpperBound(0); row++)
+            {
+                for (int column = gameBoard.GetLowerBound(1); column <= gameBoard.GetUpperBound(1); column++)
+                {
+                    gameBoard[row, column].Text = " ";
+                }
+            }
+        }
+        #endregion
+
+        #region Game Logic
 
         private void ChangePlayers()
         {
@@ -79,7 +167,7 @@ namespace TicTacToe
             //Update the label, informing the player of whose turn it is
             currentPlayerLabel.Text = currentPlayerMark + "'s Turn";
         }
-        
+
         private void NextTurn()
         {
             //Check to see if the current player has won
@@ -110,38 +198,6 @@ namespace TicTacToe
             }
         }
 
-        private void ToggleGameBoard(bool enable)
-        {
-            //This method changes the Enabled state of each game tile on the board
-            //if the arguement, "enable" is set to true:
-            //Players will be able to click on the board
-            //otherwise, the players will be unable to click any of the tiles
-            gameTile1.Enabled = enable;
-            gameTile2.Enabled = enable;
-            gameTile3.Enabled = enable;
-            gameTile4.Enabled = enable;
-            gameTile5.Enabled = enable;
-            gameTile6.Enabled = enable;
-            gameTile7.Enabled = enable;
-            gameTile8.Enabled = enable;
-            gameTile9.Enabled = enable;
-        }
-
-        private void ResetGameBoard()
-        {
-            //This method erases all previous player moves
-            //to allow for a new game to begin
-            gameTile1.Text = " ";
-            gameTile2.Text = " ";
-            gameTile3.Text = " ";
-            gameTile4.Text = " ";
-            gameTile5.Text = " ";
-            gameTile6.Text = " ";
-            gameTile7.Text = " ";
-            gameTile8.Text = " ";
-            gameTile9.Text = " ";
-        }
-
         #region Victory Conditions
         private bool CheckForHorizontalVictory()
         {
@@ -161,7 +217,7 @@ namespace TicTacToe
             {
                 horizontalVictory = true;
             }
-            
+
             //If the current player does not control all 3 tiles in any of the rows, return false
             return horizontalVictory;
         }
@@ -200,7 +256,7 @@ namespace TicTacToe
             /* 1   3
              *   5  
              * 7   9
-             */ 
+             */
 
             if (gameTile1.Text.Equals(currentPlayerMark) && gameTile5.Text.Equals(currentPlayerMark) && gameTile9.Text.Equals(currentPlayerMark))
             {
@@ -233,28 +289,6 @@ namespace TicTacToe
             //Not all of the tiles have been claimed yet
             return false;
         }
-
-        #region Game Tiles
-
-        private void gameTile_Click(object sender, EventArgs e)
-        {
-            //Save a copy of the button that was clicked
-            Button gameTile = (Button)sender;
-
-            //Make sure the tile is empty
-            if (gameTile.Text.Equals(" "))
-            {
-                //If it is, award the tile to the current player
-                gameTile.Text = currentPlayerMark;
-
-                //disable the button, to prevent it from being clicked again
-                gameTile.Enabled = false;
-
-                //End the Current Player's turn
-                NextTurn();
-            }
-        }
-       
         #endregion
 
     }

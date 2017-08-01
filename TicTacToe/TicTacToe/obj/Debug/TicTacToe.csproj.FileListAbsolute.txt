@@ -10,3 +10,9 @@ C:\Users\Odin\Desktop\TicTacToe\TicTacToe\obj\Debug\TicTacToe.pdb
 C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\bin\Debug\TicTacToe.exe.config
 C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\obj\Debug\TicTacToe.exe
 C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\obj\Debug\TicTacToe.pdb
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\bin\Debug\TicTacToe.exe
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\bin\Debug\TicTacToe.pdb
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csprojResolveAssemblyReference.cache
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\obj\Debug\TicTacToe.TicTacToeForm.resources
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\obj\Debug\TicTacToe.Properties.Resources.resources
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csproj.GenerateResource.Cache
