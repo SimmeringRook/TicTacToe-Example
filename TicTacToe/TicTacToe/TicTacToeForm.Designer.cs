@@ -68,7 +68,7 @@
             this.gameTile1.TabIndex = 2;
             this.gameTile1.Text = " ";
             this.gameTile1.UseVisualStyleBackColor = true;
-            this.gameTile1.Click += new System.EventHandler(this.gameTile1_Click);
+            this.gameTile1.Click += new System.EventHandler(this.gameTile_Click);
             // 
             // gameTile2
             // 
@@ -78,7 +78,7 @@
             this.gameTile2.TabIndex = 3;
             this.gameTile2.Text = " ";
             this.gameTile2.UseVisualStyleBackColor = true;
-            this.gameTile2.Click += new System.EventHandler(this.gameTile2_Click);
+            this.gameTile2.Click += new System.EventHandler(this.gameTile_Click);
             // 
             // gameTile3
             // 
@@ -88,7 +88,7 @@
             this.gameTile3.TabIndex = 4;
             this.gameTile3.Text = " ";
             this.gameTile3.UseVisualStyleBackColor = true;
-            this.gameTile3.Click += new System.EventHandler(this.gameTile3_Click);
+            this.gameTile3.Click += new System.EventHandler(this.gameTile_Click);
             // 
             // gameTile6
             // 
@@ -98,7 +98,7 @@
             this.gameTile6.TabIndex = 7;
             this.gameTile6.Text = " ";
             this.gameTile6.UseVisualStyleBackColor = true;
-            this.gameTile6.Click += new System.EventHandler(this.gameTile6_Click);
+            this.gameTile6.Click += new System.EventHandler(this.gameTile_Click);
             // 
             // gameTile5
             // 
@@ -108,7 +108,7 @@
             this.gameTile5.TabIndex = 6;
             this.gameTile5.Text = " ";
             this.gameTile5.UseVisualStyleBackColor = true;
-            this.gameTile5.Click += new System.EventHandler(this.gameTile5_Click);
+            this.gameTile5.Click += new System.EventHandler(this.gameTile_Click);
             // 
             // gameTile4
             // 
@@ -118,7 +118,7 @@
             this.gameTile4.TabIndex = 5;
             this.gameTile4.Text = " ";
             this.gameTile4.UseVisualStyleBackColor = true;
-            this.gameTile4.Click += new System.EventHandler(this.gameTile4_Click);
+            this.gameTile4.Click += new System.EventHandler(this.gameTile_Click);
             // 
             // gameTile9
             // 
@@ -128,7 +128,7 @@
             this.gameTile9.TabIndex = 10;
             this.gameTile9.Text = " ";
             this.gameTile9.UseVisualStyleBackColor = true;
-            this.gameTile9.Click += new System.EventHandler(this.gameTile9_Click);
+            this.gameTile9.Click += new System.EventHandler(this.gameTile_Click);
             // 
             // gameTile8
             // 
@@ -138,7 +138,7 @@
             this.gameTile8.TabIndex = 9;
             this.gameTile8.Text = " ";
             this.gameTile8.UseVisualStyleBackColor = true;
-            this.gameTile8.Click += new System.EventHandler(this.gameTile8_Click);
+            this.gameTile8.Click += new System.EventHandler(this.gameTile_Click);
             // 
             // gameTile7
             // 
@@ -148,7 +148,7 @@
             this.gameTile7.TabIndex = 8;
             this.gameTile7.Text = " ";
             this.gameTile7.UseVisualStyleBackColor = true;
-            this.gameTile7.Click += new System.EventHandler(this.gameTile7_Click);
+            this.gameTile7.Click += new System.EventHandler(this.gameTile_Click);
             // 
             // TicTacToeForm
             // 

@@ -221,9 +221,9 @@ namespace TicTacToe
             //TODO: Improve checking such that, once none of the victory conditions can be met, the game is declared
             //a draw
 
-            if (gameTile1.Text.Equals(" ") == false && gameTile1.Text.Equals(" ") == false && gameTile1.Text.Equals(" ") == false &&
-                gameTile1.Text.Equals(" ") == false && gameTile1.Text.Equals(" ") == false && gameTile1.Text.Equals(" ") == false &&
-                gameTile1.Text.Equals(" ") == false && gameTile1.Text.Equals(" ") == false && gameTile1.Text.Equals(" ") == false)
+            if (gameTile1.Text.Equals(" ") == false && gameTile2.Text.Equals(" ") == false && gameTile3.Text.Equals(" ") == false &&
+                gameTile4.Text.Equals(" ") == false && gameTile5.Text.Equals(" ") == false && gameTile6.Text.Equals(" ") == false &&
+                gameTile7.Text.Equals(" ") == false && gameTile8.Text.Equals(" ") == false && gameTile9.Text.Equals(" ") == false)
             {
                 //All tiles have been claimed, but no one has won
                 //It is a draw
@@ -235,122 +235,26 @@ namespace TicTacToe
         }
 
         #region Game Tiles
-        private void gameTile1_Click(object sender, EventArgs e)
+
+        private void gameTile_Click(object sender, EventArgs e)
         {
+            //Save a copy of the button that was clicked
+            Button gameTile = (Button)sender;
+
             //Make sure the tile is empty
-            if (gameTile1.Text.Equals(" "))
+            if (gameTile.Text.Equals(" "))
             {
                 //If it is, award the tile to the current player
-                gameTile1.Text = currentPlayerMark;
+                gameTile.Text = currentPlayerMark;
 
-                //End the current player's turn
+                //disable the button, to prevent it from being clicked again
+                gameTile.Enabled = false;
+
+                //End the Current Player's turn
                 NextTurn();
             }
         }
-
-        private void gameTile2_Click(object sender, EventArgs e)
-        {
-            //Make sure the tile is empty
-            if (gameTile2.Text.Equals(" "))
-            {
-                //If it is, award the tile to the current player
-                gameTile2.Text = currentPlayerMark;
-
-                //End the current player's turn
-                NextTurn();
-            }
-        }
-
-        private void gameTile3_Click(object sender, EventArgs e)
-        {
-            //Make sure the tile is empty
-            if (gameTile3.Text.Equals(" "))
-            {
-                //If it is, award the tile to the current player
-                gameTile3.Text = currentPlayerMark;
-
-                //End the current player's turn
-                NextTurn();
-            }
-        }
-
-        private void gameTile4_Click(object sender, EventArgs e)
-        {
-            //Make sure the tile is empty
-            if (gameTile4.Text.Equals(" "))
-            {
-                //If it is, award the tile to the current player
-                gameTile4.Text = currentPlayerMark;
-
-                //End the current player's turn
-                NextTurn();
-            }
-        }
-
-        private void gameTile5_Click(object sender, EventArgs e)
-        {
-            //Make sure the tile is empty
-            if (gameTile5.Text.Equals(" "))
-            {
-                //If it is, award the tile to the current player
-                gameTile5.Text = currentPlayerMark;
-
-                //End the current player's turn
-                NextTurn();
-            }
-        }
-
-        private void gameTile6_Click(object sender, EventArgs e)
-        {
-            //Make sure the tile is empty
-            if (gameTile6.Text.Equals(" "))
-            {
-                //If it is, award the tile to the current player
-                gameTile6.Text = currentPlayerMark;
-
-                //End the current player's turn
-                NextTurn();
-            }
-        }
-
-        private void gameTile7_Click(object sender, EventArgs e)
-        {
-            //Make sure the tile is empty
-            if (gameTile7.Text.Equals(" "))
-            {
-                //If it is, award the tile to the current player
-                gameTile7.Text = currentPlayerMark;
-
-                //End the current player's turn
-                NextTurn();
-            }
-        }
-
-        private void gameTile8_Click(object sender, EventArgs e)
-        {
-            //Make sure the tile is empty
-            if (gameTile8.Text.Equals(" "))
-            {
-                //If it is, award the tile to the current player
-                gameTile8.Text = currentPlayerMark;
-
-                //End the current player's turn
-                NextTurn();
-            }
-        }
-
-        private void gameTile9_Click(object sender, EventArgs e)
-        {
-            //Make sure the tile is empty
-            if (gameTile9.Text.Equals(" "))
-            {
-                //If it is, award the tile to the current player
-                gameTile9.Text = currentPlayerMark;
-
-                //End the current player's turn
-                NextTurn();
-            }
-        }
+       
         #endregion
 
     }
