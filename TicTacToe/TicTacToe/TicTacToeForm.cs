@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-/* Tic Tac Toe v1.0.2
+/* Tic Tac Toe v1.0.3
  * Thomas Knudson - 01 Aug 2017
  * 
  * This is a simple example of re-creating Tic Tac Toe using C# and WinForms.
@@ -199,55 +199,81 @@ namespace TicTacToe
         }
 
         #region Victory Conditions
+
+        /// <summary>
+        /// Check each row to see if the current player controls all 3 tiles.
+        /// </summary>
+        /// <returns></returns>
         private bool CheckForHorizontalVictory()
         {
-            bool horizontalVictory = false;
+            for (int row = gameBoard.GetLowerBound(0); row <= gameBoard.GetUpperBound(0); row++)
+            {
+                bool rowControledByCurrentPlayer = true;
+                
+                for (int column = gameBoard.GetLowerBound(1); column <= gameBoard.GetUpperBound(1); column++)
+                {
+                    //Save a reference of the current gameTile
+                    Button currentTile = gameBoard[row, column];
 
-            //This method checks each row, to see if the current player controls all 3 tiles
-            //If the player does control them, return true - the current player has won!
-            if (gameTile1.Text.Equals(currentPlayerMark) && gameTile2.Text.Equals(currentPlayerMark) && gameTile3.Text.Equals(currentPlayerMark))
-            {
-                horizontalVictory = true;
-            }
-            else if (gameTile4.Text.Equals(currentPlayerMark) && gameTile5.Text.Equals(currentPlayerMark) && gameTile6.Text.Equals(currentPlayerMark))
-            {
-                horizontalVictory = true;
-            }
-            else if (gameTile7.Text.Equals(currentPlayerMark) && gameTile8.Text.Equals(currentPlayerMark) && gameTile9.Text.Equals(currentPlayerMark))
-            {
-                horizontalVictory = true;
+                    if (currentTile.Text.Equals(currentPlayerMark) == false)
+                    {
+                        //The Current Player does not control all the tiles in this row.
+                        rowControledByCurrentPlayer = false;
+                    }
+                }
+
+                //Check to see if the Current Player does control all 3 tiles
+                if (rowControledByCurrentPlayer == true)
+                {
+                    //Victory has been acheived, exit early
+                    return true;
+                }
             }
 
-            //If the current player does not control all 3 tiles in any of the rows, return false
-            return horizontalVictory;
+            //The Current Player does not control 3 tiles in a row
+            return false;
         }
 
+        /// <summary>
+        /// Check each column to see if the current player controls all 3 tiles.
+        /// </summary>
+        /// <returns></returns>
         private bool CheckForVerticalVictory()
         {
-            bool verticalVictory = false;
-
-            //This method checks each column, to see if the current player controls all 3 tiles
-            //If the player does control them, return true - the current player has won!
-
-            if (gameTile1.Text.Equals(currentPlayerMark) && gameTile4.Text.Equals(currentPlayerMark) && gameTile7.Text.Equals(currentPlayerMark))
+            //Switch the order of which dimension is looped over first
+            //Since we want to check each tile in a column
+            for (int column = gameBoard.GetLowerBound(1); column <= gameBoard.GetUpperBound(1); column++)
             {
-                verticalVictory = true;
-            }
-            else if (gameTile2.Text.Equals(currentPlayerMark) && gameTile5.Text.Equals(currentPlayerMark) && gameTile8.Text.Equals(currentPlayerMark))
-            {
-                verticalVictory = true;
-            }
-            else if (gameTile3.Text.Equals(currentPlayerMark) && gameTile6.Text.Equals(currentPlayerMark) && gameTile9.Text.Equals(currentPlayerMark))
-            {
-                verticalVictory = true;
+                bool columnControledByCurrentPlayer = true;
+
+                for (int row = gameBoard.GetLowerBound(0); row <= gameBoard.GetUpperBound(0); row++)
+                {
+                    //Save a reference of the current gameTile
+                    Button currentTile = gameBoard[row, column];
+
+                    if (currentTile.Text.Equals(currentPlayerMark) == false)
+                    {
+                        //The Current Player does not control all the tiles in this column.
+                        columnControledByCurrentPlayer = false;
+                    }
+                }
+
+                //Check to see if the Current Player does control all 3 tiles
+                if (columnControledByCurrentPlayer == true)
+                {
+                    //Victory has been acheived, exit early
+                    return true;
+                }
             }
 
-            //If the current player does not control all 3 tiles in any of the columns, return false
-            return verticalVictory;
+            //The Current Player does not control 3 tiles in a row
+            return false;
         }
+
 
         private bool CheckForDiagonalVictory()
         {
+            //TODO: Refactor use utilize gameBoard
             bool diagonalVictory = false;
 
             //This method checks both diagonal possibilities;
@@ -272,22 +298,34 @@ namespace TicTacToe
 
         #endregion
 
+        /// <summary>
+        /// Check each gameTile to see if the match is a draw.
+        /// </summary>
+        /// <returns></returns>
         private bool CheckForDraw()
         {
             //TODO: Improve checking such that, once none of the victory conditions can be met, the game is declared
             //a draw
 
-            if (gameTile1.Text.Equals(" ") == false && gameTile2.Text.Equals(" ") == false && gameTile3.Text.Equals(" ") == false &&
-                gameTile4.Text.Equals(" ") == false && gameTile5.Text.Equals(" ") == false && gameTile6.Text.Equals(" ") == false &&
-                gameTile7.Text.Equals(" ") == false && gameTile8.Text.Equals(" ") == false && gameTile9.Text.Equals(" ") == false)
+            for (int row = gameBoard.GetLowerBound(0); row <= gameBoard.GetUpperBound(0); row++)
             {
-                //All tiles have been claimed, but no one has won
-                //It is a draw
-                return true;
+                for (int column = gameBoard.GetLowerBound(1); column <= gameBoard.GetUpperBound(1); column++)
+                {
+                    //Save a reference of the current gameTile
+                    Button currentTile = gameBoard[row, column];
+
+                    if (currentTile.Text.Equals(" "))
+                    {
+                        //Not all of the tiles have been claimed yet,
+                        //It is not a draw
+                        return false;
+                    }
+                }
             }
 
-            //Not all of the tiles have been claimed yet
-            return false;
+            //All tiles have been claimed, but no one has won
+            //It is a draw
+            return true;
         }
         #endregion
 
