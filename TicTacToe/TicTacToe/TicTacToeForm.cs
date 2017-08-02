@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-/* Tic Tac Toe v1.0.3
+/* Tic Tac Toe v1.0.4
  * Thomas Knudson - 01 Aug 2017
  * 
  * This is a simple example of re-creating Tic Tac Toe using C# and WinForms.
@@ -270,30 +270,88 @@ namespace TicTacToe
             return false;
         }
 
-
+        /// <summary>
+        /// Check either diagonal (1-5-9 or 3-5-7) to see if the current player controls them.
+        /// </summary>
+        /// <returns></returns>
         private bool CheckForDiagonalVictory()
         {
-            //TODO: Refactor use utilize gameBoard
-            bool diagonalVictory = false;
-
-            //This method checks both diagonal possibilities;
-            //If the current player controls one, return true - the current player has won!
-
+            bool diagonal_159_Control = true;
+            bool diagonal_357_Control = true;
             /* 1   3
              *   5  
-             * 7   9
-             */
+             * 7   9*/
 
-            if (gameTile1.Text.Equals(currentPlayerMark) && gameTile5.Text.Equals(currentPlayerMark) && gameTile9.Text.Equals(currentPlayerMark))
+            for (int row = gameBoard.GetLowerBound(0); row <= gameBoard.GetUpperBound(0); row++)
             {
-                diagonalVictory = true;
-            }
-            else if (gameTile3.Text.Equals(currentPlayerMark) && gameTile5.Text.Equals(currentPlayerMark) && gameTile7.Text.Equals(currentPlayerMark))
-            {
-                diagonalVictory = true;
+                for (int column = gameBoard.GetLowerBound(1); column <= gameBoard.GetUpperBound(1); column++)
+                {
+                    //Check Tiles 1, 9
+                    if (row == column)
+                    {
+                        //Save a reference to the Current Tile
+                        Button currentTile = gameBoard[row, column];
+
+                        if (currentTile.Text.Equals(currentPlayerMark) == false)
+                        {
+                            //The Current Player does not control all the tiles in this diagonal.
+                            diagonal_159_Control = false;
+                        }
+                    }
+                    //Check Tile 3
+                    else if (row == gameBoard.GetLowerBound(0) && column == gameBoard.GetUpperBound(1))
+                    {
+                        //Save a reference to the Current Tile
+                        Button currentTile = gameBoard[row, column];
+
+                        if (currentTile.Text.Equals(currentPlayerMark) == false)
+                        {
+                            //The Current Player does not control all the tiles in this diagonal.
+                            diagonal_357_Control = false;
+                        }
+                    }
+                    //Check Tile 7
+                    else if (row == gameBoard.GetUpperBound(0) && column == gameBoard.GetLowerBound(1))
+                    {
+                        //Save a reference to the Current Tile
+                        Button currentTile = gameBoard[row, column];
+
+                        if (currentTile.Text.Equals(currentPlayerMark) == false)
+                        {
+                            //The Current Player does not control all the tiles in this diagonal.
+                            diagonal_357_Control = false;
+                        }
+                    }
+                    //Check Tile 5
+                    else if (row == Math.Ceiling(gameBoard.GetUpperBound(0) / 2.0) &&
+                            column == Math.Ceiling(gameBoard.GetUpperBound(0) / 2.0))
+                    {
+                        //Save a reference to the Current Tile   
+                        Button currentTile = gameBoard[row, column];
+
+                        if (currentTile.Text.Equals(currentPlayerMark) == false)
+                        {
+                            //The Current Player does not control all the tiles in this diagonal
+                            diagonal_159_Control = false;
+                            diagonal_357_Control = false;
+                        }
+                    }
+                }
+                
             }
 
-            return diagonalVictory;
+            //Check the results
+            if (diagonal_159_Control || diagonal_357_Control)
+            {
+                //The current player either controls tiles:
+                //1,5,9 or 3,5,7
+                return true;
+            }
+            else
+            {
+                //No victory condition
+                return false;
+            }
         }
 
         #endregion
