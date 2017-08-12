@@ -116,8 +116,8 @@ namespace TicTacToe
         /// Players will be able to click on the board.
         /// Otherwise, the players will be unable to interact with any of the tiles.
         /// </summary>
-        /// <param name="newState"></param>
-        private void ToggleGameBoard(bool newState)
+        /// <param name="isEnabled"></param>
+        private void ToggleGameBoard(bool isEnabled)
         {
             //Loop over each gameTile in the gameBoard, and set the Enabled property to the value of "newState"
             for (int row = gameBoard.GetLowerBound(0); row <= gameBoard.GetUpperBound(0); row++)
@@ -129,7 +129,7 @@ namespace TicTacToe
                      */
                 for (int column = gameBoard.GetLowerBound(1); column <= gameBoard.GetUpperBound(1); column++)
                 {
-                    gameBoard[row, column].Enabled = newState;
+                    gameBoard[row, column].Enabled = isEnabled;
                 }
             }
         }
@@ -171,7 +171,7 @@ namespace TicTacToe
         private void NextTurn()
         {
             //Check to see if the current player has won
-            if (CheckForHorizontalVictory() || CheckForVerticalVictory() || CheckForDiagonalVictory())
+            if (HasCurrentPlayerWon())
             {
                 //The current player has won
 
@@ -199,6 +199,26 @@ namespace TicTacToe
         }
 
         #region Victory Conditions
+        /// <summary>
+        /// Combines all Victory condition checking into one function.
+        /// </summary>
+        /// <returns></returns>
+        private bool HasCurrentPlayerWon()
+        {
+            //While somewhat redundant, the language is more clear and
+            //explicit in regards to what exactly is being checked in 
+            //NextTurn() 
+            if (CheckForHorizontalVictory())
+                return true;
+
+            if (CheckForVerticalVictory())
+                return true;
+
+            if (CheckForDiagonalVictory())
+                return true;
+
+            return false;
+        }
 
         /// <summary>
         /// Check each row to see if the current player controls all 3 tiles.
