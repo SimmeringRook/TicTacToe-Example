@@ -16,3 +16,5 @@ C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\obj\Debug\T
 C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\obj\Debug\TicTacToe.TicTacToeForm.resources
 C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\obj\Debug\TicTacToe.Properties.Resources.resources
 C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csproj.GenerateResource.Cache
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\bin\Debug\Localization.dll
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\TicTacToe\bin\Debug\Localization.pdb

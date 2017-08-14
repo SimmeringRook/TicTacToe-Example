@@ -1,20 +1,46 @@
-﻿using System;
+﻿using Localization;
+using Localization.SupportedLanguages;
+using System;
 using System.Windows.Forms;
 
 namespace TicTacToe
 {
+    /// <summary>
+    /// Handles the changing of turns, <see cref="NextTurn"/>, checks for victory (<see cref="HasCurrentPlayerWon"/>)
+    /// and (<see cref="CheckForDraw"/>), and provides the correct string values for the choosen language (<see cref="Localization"/>).
+    /// </summary>
     internal class TicTacToeEngine
     {
+        
+        #region Language
+        /// <summary>
+        /// Reference to the currently selected language's data.
+        /// </summary>
+        private LocalizationManager Localization;
+
+        /// <summary>
+        /// Initializes a new LocalizationManager and loads the language data for <paramref name="languageToDisplay"/>.
+        /// </summary>
+        /// <param name="languageToDisplay">The language to display.</param>
+        internal void UpdateLanguage(Languages languageToDisplay)
+        {
+            Localization = new LocalizationManager(languageToDisplay);
+        }
+        #endregion
+
         #region GameBoard Management
         private Button[,] gameBoard;
 
         /// <summary>
-        /// Assign the GameBoard to the Engine.
+        /// Assign the GameBoard to the Engine and language messages:
+        /// <see cref="UpdateLanguage(Languages)"/>
         /// </summary>
-        /// <param name="gameBoard"></param>
+        /// <param name="gameBoard">The 3x3 grid of tiles</param>
         internal void Initialize(Button[,] gameBoard)
         {
             this.gameBoard = gameBoard;
+            UpdateLanguage(Languages.German);
+            CurrentPlayerMark = Localization.GetPlayerOneMark();
         }
 
 
@@ -23,7 +49,7 @@ namespace TicTacToe
         /// </summary>
         internal void InitializeNewGame()
         {
-            CurrentPlayerMark = player1Mark;
+            CurrentPlayerMark = Localization.GetPlayerOneMark();
             ToggleGameBoard(isEnabled: true);
             ResetGameBoard();
         }
@@ -66,8 +92,6 @@ namespace TicTacToe
         #endregion
 
         #region String Helper Functions/Variables
-        private string player1Mark = "X";
-        private string player2Mark = "O";
 
         internal string CurrentPlayerMark
         {
@@ -82,30 +106,12 @@ namespace TicTacToe
         }
 
         /// <summary>
-        /// Returns the Victory message.
-        /// </summary>
-        /// <returns></returns>
-        internal string GetVictoryMessage()
-        {
-            return CurrentPlayerMark + " is victorious!";
-        }
-
-        /// <summary>
-        /// Returns the Draw message.
-        /// </summary>
-        /// <returns></returns>
-        internal string GetDrawMessage()
-        {
-            return "The match ends in a draw!";
-        }
-
-        /// <summary>
         /// Returns whose turn it currently is.
         /// </summary>
         /// <returns></returns>
         internal string GetPlayerTurnMessage()
         {
-            return CurrentPlayerMark + "'s turn";
+            return CurrentPlayerMark + Localization.GetPlayerTurnMessage();
         }
         #endregion
 
@@ -115,14 +121,14 @@ namespace TicTacToe
         private void ChangePlayers()
         {
             //If it is currently player 1's turn; switch to player 2
-            if (CurrentPlayerMark.Equals(player1Mark))
+            if (CurrentPlayerMark.Equals(Localization.GetPlayerOneMark()))
             {
-                CurrentPlayerMark = player2Mark;
+                CurrentPlayerMark = Localization.GetPlayerTwoMark();
             }
             else
             {
                 //switch to player 1
-                CurrentPlayerMark = player1Mark;
+                CurrentPlayerMark = Localization.GetPlayerOneMark();
             }
 
         }
@@ -142,7 +148,7 @@ namespace TicTacToe
                 ToggleGameBoard(false);
 
                 //Inform the players that the current player has won
-                MessageBox.Show(GetVictoryMessage());
+                MessageBox.Show(CurrentPlayerMark + Localization.GetVictoryMessage());
             }
             else if (CheckForDraw())
             {
@@ -152,7 +158,7 @@ namespace TicTacToe
                 ToggleGameBoard(false);
 
                 //Inform the players the match is over
-                MessageBox.Show(GetDrawMessage());
+                MessageBox.Show(CurrentPlayerMark + Localization.GetDrawMessage());
             }
             else
             {

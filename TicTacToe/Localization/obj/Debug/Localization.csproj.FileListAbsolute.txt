@@ -1,0 +1,5 @@
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\Localization\bin\Debug\Localization.dll
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\Localization\bin\Debug\Localization.pdb
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\Localization\obj\Debug\Localization.csprojResolveAssemblyReference.cache
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\Localization\obj\Debug\Localization.dll
+C:\Users\Odin\Documents\GitHub\TicTacToe-Example\TicTacToe\Localization\obj\Debug\Localization.pdb

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 
-/* Tic Tac Toe v1.0.6
- * Thomas Knudson - 12 Aug 2017
+/* Tic Tac Toe v1.0.7
+ * Thomas Knudson - 13 Aug 2017
  * 
  * This is a simple example of re-creating Tic Tac Toe using C# and WinForms.
  * 
@@ -39,10 +39,11 @@ using System.Windows.Forms;
 
 namespace TicTacToe
 {
+    /// <summary>
+    /// Displays a game board for Tic Tac Toe.
+    /// </summary>
     public partial class TicTacToeForm : Form
     {
-        /* The gameEngine will now be responsible for handling all 
-         * of the game logic related to TicTacToe */
         private TicTacToeEngine gameEngine;
 
         public TicTacToeForm()
@@ -80,6 +81,15 @@ namespace TicTacToe
 
             //Assign the gameBoard to the gameEngine
             gameEngine.Initialize(gameBoard);
+            UpdateUI();
+        }
+
+        /// <summary>
+        /// Update all form controls to display the correct language.
+        /// </summary>
+        public void UpdateUI()
+        {
+            currentPlayerLabel.Text = gameEngine.GetPlayerTurnMessage();
         }
 
         private void gameTile_Click(object sender, EventArgs e)
